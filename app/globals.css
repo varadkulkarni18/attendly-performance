@@ -1,0 +1,182 @@
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-source-serif), Georgia, serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+}
+
+:root {
+  color-scheme: light;
+  --font-source-serif: "Source Serif 4 Variable";
+  --font-playfair: "Playfair Display Variable";
+  --font-jetbrains: "JetBrains Mono Variable";
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #000000;
+  --muted: #f5f5f5;
+  --muted-foreground: #525252;
+  --accent: #000000;
+  --accent-foreground: #ffffff;
+  --destructive: #000000;
+  --border: #000000;
+  --border-light: #e5e5e5;
+  --input: #000000;
+  --ring: #000000;
+  --radius: 0px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  ::selection {
+    background: #000;
+    color: #fff;
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .texture-lines {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .texture-lines::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      #000 1px,
+      #000 2px
+    );
+    background-size: 100% 4px;
+    opacity: 0.025;
+  }
+
+  .texture-grid {
+    background-image:
+      linear-gradient(#0000000d 1px, transparent 1px),
+      linear-gradient(90deg, #0000000d 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .texture-diagonal {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      #0000000a 40px,
+      #0000000a 42px
+    );
+  }
+
+  .texture-vertical-inverse {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      #ffffff0d 1px,
+      #ffffff0d 2px
+    );
+    background-size: 4px 100%;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-solid focus-visible:outline-foreground;
+  }
+
+  .focus-ring-inverse {
+    @apply focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-solid focus-visible:outline-white;
+  }
+
+  .interactive-transition {
+    transition:
+      color 160ms ease,
+      background-color 160ms ease,
+      border-color 160ms ease,
+      opacity 160ms ease,
+      transform 160ms ease;
+  }
+
+  .interactive-transition:active {
+    transform: translateY(1px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+
+  .interactive-transition:active {
+    transform: none;
+  }
+}
